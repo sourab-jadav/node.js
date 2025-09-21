@@ -8,15 +8,23 @@ const process = require('process')
 // streams on process object - these control the communication channel between node process and os exec environment
 // stdin stdout stderr
 
-process.stdin.setEncoding('utf-8')
-console.log('type something and press enter')
+// process.stdin.setEncoding('utf-8')
+// console.log('type something and press enter')
 
-process.stdin.on('data',(data)=>{   // this is async
-    console.log('you typed :',data.trim());
-    if(data.trim()=='exit'){
-        process.exit(0);
+// process.stdin.on('data',(data)=>{   // this is async
+//     console.log('you typed :',data.trim());
+//     if(data.trim()=='exit'){
+//         process.exit(0);
+//     }
+// })
+
+// process.stdout.write('let\'s write a simple calculator'); // this is sync method
+
+// 'data' event vs 'readable' event
+//  we use readable when you manually want to pull the data chunk by chunk
+process.stdin.on('readable',()=>{
+ const chunk=process.stdin.read();
+    if(chunk!==null){
+    process.stdout.write(chunk);
     }
-})
-
-process.stdout.write('let\'s write a simple calculator'); // this is sync method
-
+ })
