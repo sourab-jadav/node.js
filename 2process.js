@@ -18,3 +18,5 @@ process.stdin.on('data',(data)=>{   // this is async
     }
 })
 
+process.stdout.write('let\'s write a simple calculator'); // this is sync method
+
