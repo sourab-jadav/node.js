@@ -1,0 +1,9 @@
+
+
+** exports vs module.exports
+module.exports = ... -> when you want to export a single thing(function,class,object)
+exports.foo = ... when you want to export multiple properties
+
+- export is just a shortcut reference to the module.exports
+- console.log(exports=== module.exports); //true
+  
