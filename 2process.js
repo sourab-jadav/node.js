@@ -5,3 +5,5 @@ const process = require('process')
 // val1=10 val2=20 node file.js
 // console.log(process.env.val1)
 
+// streams on process object - these control the communication channel between node process and os exec environment
+// stdin stdout stderr
