@@ -29,3 +29,31 @@ fetchDataUsingPromise().then(
     .finally(()=>{
         console.log("request finished")
     })
+
+
+// simulate fetch using async await
+
+// If you declare it async, it automatically returns a Promise.
+// fetchData defined as async
+async function fetchData() {
+  return { id: 1, name: "Alice" }; // automatically wrapped in a Promise
+}
+
+// fetchData defined with Promise
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ id: 1, name: "Alice" }); // success
+      // reject("Error fetching data"); // if you want to simulate failure
+    }, 1000); // simulate network delay
+  });
+}
+
+
+// Using async/await
+async function getData() {
+  const data = await fetchData();
+  console.log(data);
+}
+
+getData();
