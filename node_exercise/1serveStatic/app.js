@@ -3,6 +3,7 @@ const app=express()
 const path=require('path')
 const morgan=require('morgan')
 const sessionRouter =express.Router()
+const sessions=require('./src/data/sessions.json')
 
 const PORT = process.env.PORT || 3000
 
@@ -25,7 +26,14 @@ app.get('/',(req,res)=>{
 sessionRouter.route('/')
 .get((req,res)=>{
     // res.send('hello sessions')
+    res.render('sessions',{
+        sessions
+    })
 })
+// sessionRouter.route('/')
+// .get((req,res)=>{
+//     // res.send('hello sessions')
+// })
 
 sessionRouter.route('/1')
 .get((req,res)=>{
