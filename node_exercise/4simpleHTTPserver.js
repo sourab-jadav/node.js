@@ -32,6 +32,11 @@ const server = http.createServer(async (req,res)=>{
     if(req.method === "GET" && req.url === '/users'){
         return res.end(JSON.stringfy(users))
     }
+
+    // GET /users/:id
+    if(req.method === "GET" && urlParts[0] === "users" && urlParts[1]){
+        const user = users.find(u=> u.id === parseInt(urlParts[1]))
+    }
     res.end('hello world')
 })
 
