@@ -55,5 +55,22 @@ const server = http.createServer(async (req,res)=>{
     res.end('hello world')
 })
 
+// PUT /users/:id
+  if (req.method === "PUT" && urlParts[0] === "users" && urlParts[1]) {
+    try {
+      const body = await getRequestBody(req);
+      const idx = users.findIndex(u => u.id === parseInt(urlParts[1]));
+      if (idx === -1) {
+        res.statusCode = 404;
+        return res.end(JSON.stringify({ message: "User not found" }));
+      }
+      users[idx] = { ...users[idx], ...body };
+      return res.end(JSON.stringify(users[idx]));
+    } catch (err) {
+      res.statusCode = 400;
+      return res.end(JSON.stringify({ message: "Invalid JSON" }));
+    }
+  }
+
 server.listen(3000,()=>console.log("server running on http://localhost:3000"))
 
