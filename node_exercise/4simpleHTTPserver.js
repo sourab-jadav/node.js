@@ -30,13 +30,28 @@ const server = http.createServer(async (req,res)=>{
     const urlParts=req.url.split("/").filter(Boolean);
 
     if(req.method === "GET" && req.url === '/users'){
-        return res.end(JSON.stringfy(users))
+        return res.end(JSON.stringify(users))
     }
 
     // GET /users/:id
     if(req.method === "GET" && urlParts[0] === "users" && urlParts[1]){
         const user = users.find(u=> u.id === parseInt(urlParts[1]))
     }
+
+    // POST /users
+    if(req.method === "POST" && req.url === "/users"){
+        try{
+            const body = await getRequestBody(req);
+            const newUser = { id: Date.now(), ...body };
+            users.push(newUser);
+            res.statusCode=201;
+            res.end(JSON.stringify(newUser));
+        }catch(err){
+            res.statusCode = 400;
+            return res.end(JSON.stringify(newUser))
+        }
+    }
+    
     res.end('hello world')
 })
 
