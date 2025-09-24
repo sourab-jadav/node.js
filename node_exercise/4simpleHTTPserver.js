@@ -52,8 +52,6 @@ const server = http.createServer(async (req,res)=>{
         }
     }
     
-    res.end('hello world')
-})
 
 // PUT /users/:id
   if (req.method === "PUT" && urlParts[0] === "users" && urlParts[1]) {
@@ -71,6 +69,20 @@ const server = http.createServer(async (req,res)=>{
       return res.end(JSON.stringify({ message: "Invalid JSON" }));
     }
   }
+
+// DELETE /users/:id
+  if (req.method === "DELETE" && urlParts[0] === "users" && urlParts[1]) {
+    const idx = users.findIndex(u => u.id === parseInt(urlParts[1]));
+    if (idx === -1) {
+      res.statusCode = 404;
+      return res.end(JSON.stringify({ message: "User not found" }));
+    }
+    const deleted = users.splice(idx, 1);
+    return res.end(JSON.stringify(deleted[0]));
+  }
+
+    res.end('hello world')
+})
 
 server.listen(3000,()=>console.log("server running on http://localhost:3000"))
 
