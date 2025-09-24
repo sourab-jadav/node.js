@@ -28,6 +28,10 @@ const server = http.createServer(async (req,res)=>{
     // res.writeHead(200,{'Content-Type':'text/plain'})
     // res.setHeader("Content-Type", "application/json");
     const urlParts=req.url.split("/").filter(Boolean);
+
+    if(req.method === "GET" && req.url === '/users'){
+        return res.end(JSON.stringfy(users))
+    }
     res.end('hello world')
 })
 
