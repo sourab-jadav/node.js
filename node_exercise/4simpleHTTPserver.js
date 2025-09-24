@@ -80,8 +80,10 @@ const server = http.createServer(async (req,res)=>{
     const deleted = users.splice(idx, 1);
     return res.end(JSON.stringify(deleted[0]));
   }
+ // Fallback
+  res.statusCode = 404;
+  res.end(JSON.stringify({ message: "Route not found" }));
 
-    res.end('hello world')
 })
 
 server.listen(3000,()=>console.log("server running on http://localhost:3000"))
