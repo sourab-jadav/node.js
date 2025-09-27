@@ -1,10 +1,12 @@
 const express=require('express')
+const bodyparser=require('body-parser')
 const app=express()
 const path=require('path')
 const morgan=require('morgan')
 
 const sessionRouter =require('./src/routers/sessionsRouter')
 const adminRouter = require('./src/routers/AdminRouter')
+const authRouter= require('./src/routers/authRouter')
 
 const PORT = process.env.PORT || 3000
 
@@ -13,6 +15,10 @@ app.use(morgan('tiny'))  //this gives a tiny of information
 app.use(express.static(path.join(__dirname,'/public/')))
 app.use('/sessions',sessionRouter)
 app.use('/admin',adminRouter)
+app.use('/auth',authRouter)
+app.use(bodyparser.json())//this used to be bodyparser.json()
+app.use(bodyparser.urlencoded({ extended: false }));//this looks in the body and takes whatever returned by the express.json()
+
 
 
 
