@@ -21,3 +21,39 @@ sessionRouter.route('/:id')  //this tells you do a request for /sessions/<someth
 })
 
 module.exports = sessionRouter
+
+
+
+// const express=require('express')
+// const debug=require('debug')('app:sessionRouter')
+// const {MongoClient, ObjectId} = require('mongodb')
+// const sessions=require('../data/sessions.json')
+
+
+
+// const sessionRouter =express.Router()
+
+
+// sessionRouter.route('/').get((req,res)=>{
+//     const url = 'mongodb+srv://sourabhjadav7:n8VLVoPro48b15IX@globalmantics.uk0xb1e.mongodb.net?retryWrites=true&w=majority&appName=globalmantics';
+//     const dbName = 'globalmantics';
+
+//     (async function mongo() {
+//         let client;
+//         try {
+//             client = await MongoClient.connect(url);
+//             debug('Connected to MongoDB');
+
+//             const db = client.db(dbName);
+//             const sessions = await db.collection('sessions').find().toArray();
+//             res.render('sessions',{sessions});
+//         } catch (error) {
+//             console.error(error.stack);
+//             res.status(500).json({ error: 'Internal server error' });
+//         } finally {
+//             if (client) client.close(); }
+//     })();
+// })
+
+// module.exports=sessionRouter
+
